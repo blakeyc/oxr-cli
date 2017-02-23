@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/blakeyc/oxr-cli/jobs"
 )
@@ -18,7 +19,7 @@ var (
 	job          = flag.String("job", "", "task type to perform (latest|daily|historical)")
 	appID        = flag.String("app_id", "", "your open exchange rates app_id")
 	baseCurrency = flag.String("base", "USD", "which currency to use as the base, defaults to USD")
-	date         = flag.String("date", "", "the date to get historical rates for (YYYY-MM-DD)")
+	dates        = flag.String("dates", "", "the dates to get historical rates for (YYYY-MM-DD)")
 )
 
 func main() {
@@ -48,10 +49,12 @@ func main() {
 		err = jobs.GetLatest(*appID, *baseCurrency, *output)
 
 	case "historical":
-		if *date == "" {
-			log.Fatal("error: missing --date")
+		if *dates == "" {
+			log.Fatal("error: missing --dates")
 		}
-		err = jobs.GetHistorical(*appID, *date, *baseCurrency, *output)
+		var datesStr = *dates
+		var dates = strings.Split(datesStr, ",")
+		err = jobs.GetHistorical(*appID, dates, *baseCurrency, *output)
 	}
 
 	if err != nil {

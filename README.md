@@ -16,7 +16,7 @@
 
 `--output` Path to the file you wish to write results to.
 
-`--date` Date of historical exchange rates.
+`--dates` Date of historical exchange rates, can supply multiple dates.
 
 `--base` Currency to use as the base, defaults to USD
 
@@ -24,4 +24,4 @@
     oxr --job latest --app_id YOUR_APP_ID --output PATH_TO_FILE
 
 ### Historical
-    oxr --job historical --date YYYY-MM-DD --app_id YOUR_APP_ID --output PATH_TO_FILE
+    oxr --job historical --dates YYYY-MM-DD --app_id YOUR_APP_ID --output PATH_TO_FILE
