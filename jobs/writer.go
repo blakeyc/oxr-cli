@@ -11,7 +11,7 @@ import (
 
 // WriteToFile (output, r)
 // Writes the fetched data to file.
-func WriteToFile(output string, results []*oxr.Rates) (err error) {
+func WriteToFile(output string, results []*oxr.Rates, fields []string) (err error) {
 
 	log.Printf("info: writing to file %s", output)
 
