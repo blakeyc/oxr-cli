@@ -58,5 +58,5 @@ func WriteToFile(output string, results []*oxr.Rates, fields []string) (err erro
 
 	w.Flush()
 
-	return
+	return nil
 }
