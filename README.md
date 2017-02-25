@@ -8,6 +8,11 @@
 
 ## Install
 
+Download binaries directly from the releases page, or alternatively clone and build from
+source, see below for details.
+
+TODO: Publish to homebrew etc...
+
 ## Usage
 
 ### Commands
