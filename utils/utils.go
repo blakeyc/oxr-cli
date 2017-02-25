@@ -45,7 +45,7 @@ func ExtractFields(fieldStr string) (fileds []string, err error) {
 	fields := strings.Split(fieldStr, ",")
 
 	for _, field := range fields {
-		if !stringInSlice(field, fieldList) {
+		if !StringInSlice(field, fieldList) {
 			return nil, errors.New("utils: unrecognized field supplied")
 		}
 	}
@@ -54,7 +54,8 @@ func ExtractFields(fieldStr string) (fileds []string, err error) {
 
 }
 
-func stringInSlice(str string, list []string) bool {
+// StringInSlice check if a string is in a slice
+func StringInSlice(str string, list []string) bool {
 	for _, v := range list {
 		if v == str {
 			return true

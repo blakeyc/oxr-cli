@@ -14,7 +14,7 @@ func GetLatest(appID string, baseCurrency string, output string, fields []string
 
 	log.Print("info: starting latest job")
 
-	var results = make([]*oxr.Rates, 1)
+	results := make([]*oxr.Rates, 1)
 	client := oxr.New(appID)
 
 	r, err := client.LatestWithOptions(strings.ToUpper(baseCurrency), nil)
@@ -42,7 +42,7 @@ func GetHistorical(appID string, baseCurrency string, output string, fields []st
 
 	log.Print("info: starting historical job")
 
-	var results = make([]*oxr.Rates, len(dates))
+	results := make([]*oxr.Rates, len(dates))
 	client := oxr.New(appID)
 
 	for i, date := range dates {
