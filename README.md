@@ -1,5 +1,7 @@
 # oxr-cli
 
+[![Build Status](https://travis-ci.org/blakeyc/oxr-cli.svg?branch=master)](https://travis-ci.org/blakeyc/oxr-cli)
+
 >Command line utility to extract data from https://openexchangerates.org/ API.
 
 **Note**: You need to register an account to get an app_id from Open Exchange Rates.
@@ -46,6 +48,7 @@
 ## Build
 
 To run or build from source clone the repo and run `make build` this will also install the dependencies listed below.
+The executables will be output to the `./dist` directory for darwin, linux and windows.
 
 ### Dependencies
 
