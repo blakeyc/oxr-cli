@@ -20,6 +20,8 @@ var (
 	appID        = flag.String("app_id", "", "your open exchange rates app_id")
 	baseCurrency = flag.String("base", "USD", "which currency to use as the base, defaults to USD")
 	dates        = flag.String("dates", "", "the dates to get historical rates for (YYYY-MM-DD)")
+	start        = flag.String("start", "", "start date for time series request")
+	end          = flag.String("end", "", "end date for time series request")
 	fields       = flag.String("fields", "base,currency,rate,timestamp,date", "pick which fields to include in output (base,currency,rate,timestamp,date)")
 )
 
@@ -70,6 +72,14 @@ func main() {
 			log.Fatal(errDates)
 		}
 		err = jobs.GetHistorical(*appID, *baseCurrency, *output, fields, dates)
+
+	case "timeseries":
+
+		if *start == "" || *end == "" {
+			log.Fatal("error: missing --start || --end")
+		}
+
+		err = jobs.GetTimeSeries(*appID, *baseCurrency, *output, fields, *start, *end)
 
 	default:
 

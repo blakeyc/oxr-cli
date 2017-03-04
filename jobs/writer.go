@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -12,9 +13,22 @@ import (
 	"github.com/mvillalba/go-openexchangerates/oxr"
 )
 
+// ByTimestamp Interface for sort functions
+type ByTimestamp []oxr.Rates
+
+func (s ByTimestamp) Len() int {
+	return len(s)
+}
+func (s ByTimestamp) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s ByTimestamp) Less(i, j int) bool {
+	return s[i].Timestamp < s[j].Timestamp
+}
+
 // WriteToFile (output, r)
 // Writes the fetched data to file.
-func WriteToFile(output string, results []*oxr.Rates, fields []string) (err error) {
+func WriteToFile(output string, results []oxr.Rates, fields []string) (err error) {
 
 	log.Printf("info: writing to file %s", output)
 
@@ -27,9 +41,20 @@ func WriteToFile(output string, results []*oxr.Rates, fields []string) (err erro
 
 	w := bufio.NewWriter(file)
 
+	// Sort based on timestamp field
+	sort.Sort(ByTimestamp(results))
+
 	for _, r := range results {
 
-		for k := range r.Rates {
+		keys := []string{}
+		for key := range r.Rates {
+			keys = append(keys, key)
+		}
+
+		sort.Strings(keys)
+
+		for k := range keys {
+			key := keys[k]
 
 			line := make([]string, len(fields))
 
@@ -39,9 +64,9 @@ func WriteToFile(output string, results []*oxr.Rates, fields []string) (err erro
 				case "base":
 					line[i] = r.Base
 				case "currency":
-					line[i] = k
+					line[i] = key
 				case "rate":
-					line[i] = string(r.Rates[k])
+					line[i] = string(r.Rates[key])
 				case "timestamp":
 					line[i] = strconv.Itoa(r.Timestamp)
 				case "date":
