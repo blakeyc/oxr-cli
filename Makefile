@@ -18,7 +18,8 @@ package: build
 build:
 	make get-deps
 	make test
+
 	rm -rf ./dist/binaries/*
 	CGO_ENABLED=0 GOOS=darwin go build -a -installsuffix cgo -o ./dist/binaries/darwin/oxr .
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./dist/binaries/linux/oxr .
-	CGO_ENABLED=0 GOOS=windows go build -a -installsuffix cgo -o ./dist/binaries/windows/oxr .
+	CGO_ENABLED=0 GOOS=windows go build -a -installsuffix cgo -o ./dist/binaries/windows/oxr.exe .
