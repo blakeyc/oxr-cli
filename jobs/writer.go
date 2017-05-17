@@ -70,7 +70,7 @@ func WriteToFile(output string, results []oxr.Rates, fields []string) (err error
 				case "timestamp":
 					line[i] = strconv.Itoa(r.Timestamp)
 				case "date":
-					line[i] = time.Unix(int64(r.Timestamp), int64(0)).Format("2006-01-02")
+					line[i] = time.Unix(int64(r.Timestamp), int64(0)).UTC().Format("2006-01-02")
 				}
 
 			}
